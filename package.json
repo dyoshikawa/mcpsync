@@ -1,7 +1,7 @@
 {
 	"name": "mcpsync",
 	"version": "0.1.0",
-	"description": "Unified AI rules management CLI tool that generates configuration files for various AI development tools",
+	"description": "Unified AI configuration management CLI tool that generates MCP server configurations for various AI development tools",
 	"keywords": [
 		"ai",
 		"rules",

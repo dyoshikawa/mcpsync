@@ -15,9 +15,12 @@ import {
 
 const program = new Command();
 
-program.name("rulesync").description("Unified AI rules management CLI tool").version("0.34.0");
+program
+  .name("mcpsync")
+  .description("Unified AI configuration management CLI tool")
+  .version("0.1.0");
 
-program.command("init").description("Initialize rulesync in current directory").action(initCommand);
+program.command("init").description("Initialize mcpsync in current directory").action(initCommand);
 
 program.command("add <filename>").description("Add a new rule file").action(addCommand);
 
@@ -28,7 +31,7 @@ program
 
 program
   .command("import")
-  .description("Import configurations from AI tools to rulesync format")
+  .description("Import configurations from AI tools to mcpsync format")
   .option("--claudecode", "Import from Claude Code (CLAUDE.md)")
   .option("--cursor", "Import from Cursor (.cursorrules)")
   .option("--copilot", "Import from GitHub Copilot (.github/copilot-instructions.md)")
@@ -40,7 +43,7 @@ program
 
 program
   .command("generate")
-  .description("Generate configuration files for AI tools")
+  .description("Generate MCP configuration files for AI tools")
   .option("--copilot", "Generate only for GitHub Copilot")
   .option("--cursor", "Generate only for Cursor")
   .option("--cline", "Generate only for Cline")
@@ -86,9 +89,9 @@ program
     await generateCommand(generateOptions);
   });
 
-program.command("validate").description("Validate rulesync configuration").action(validateCommand);
+program.command("validate").description("Validate mcpsync configuration").action(validateCommand);
 
-program.command("status").description("Show current status of rulesync").action(statusCommand);
+program.command("status").description("Show current status of mcpsync").action(statusCommand);
 
 program
   .command("watch")
