@@ -17,3 +17,5 @@ tools:
 - cursor
 - cline
 - roo
+
+当面ローカル（stdio）MCPサーバーのみ対応する。
