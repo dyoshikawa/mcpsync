@@ -2,9 +2,20 @@
 
 `.mcpsync/mcp.json` に設定を定義する。
 
-claudecodeライクな設定
+claudecodeライクな設定ファイル
 
-```
+```json
+// .mcpsync/mcp.json
+{
+  "mcpServers": {
+    "sample-server": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["./sample-server.js"],
+      "env": {}
+    }
+  }
+}
 ```
 
 ```bash
