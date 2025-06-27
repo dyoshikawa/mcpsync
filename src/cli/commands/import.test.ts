@@ -1,5 +1,5 @@
-import { describe, expect, it, beforeEach, afterEach, vi } from "vitest";
-import { existsSync, readFileSync, writeFileSync } from "fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { importCommand } from "./import.js";
 
 // Mock fs functions
@@ -39,9 +39,9 @@ describe("importCommand", () => {
 
   it("should error when config file is not found", async () => {
     mockExistsSync.mockReturnValue(false);
-    
+
     await importCommand({ cursor: true });
-    
+
     expect(console.error).toHaveBeenCalledWith("No MCP configuration found for cursor");
   });
 
@@ -51,9 +51,9 @@ describe("importCommand", () => {
         "test-server": {
           command: "node",
           args: ["server.js"],
-          env: { API_KEY: "test" }
-        }
-      }
+          env: { API_KEY: "test" },
+        },
+      },
     };
 
     // Mock file exists
@@ -70,11 +70,15 @@ describe("importCommand", () => {
 
     expect(mockWriteFileSync).toHaveBeenCalledWith(
       "./mcp.json",
-      JSON.stringify({
-        mcpServers: {
-          "cursor-test-server": mockCursorConfig.mcpServers["test-server"]
-        }
-      }, null, 2)
+      JSON.stringify(
+        {
+          mcpServers: {
+            "cursor-test-server": mockCursorConfig.mcpServers["test-server"],
+          },
+        },
+        null,
+        2
+      )
     );
 
     expect(console.log).toHaveBeenCalledWith("Successfully imported MCP configuration from cursor");
@@ -85,18 +89,18 @@ describe("importCommand", () => {
       mcpServers: {
         "existing-server": {
           command: "python",
-          args: ["existing.py"]
-        }
-      }
+          args: ["existing.py"],
+        },
+      },
     };
 
     const cursorConfig = {
       mcpServers: {
         "new-server": {
           command: "node",
-          args: ["new.js"]
-        }
-      }
+          args: ["new.js"],
+        },
+      },
     };
 
     mockExistsSync.mockImplementation((path) => {
@@ -114,12 +118,16 @@ describe("importCommand", () => {
 
     expect(mockWriteFileSync).toHaveBeenCalledWith(
       "./mcp.json",
-      JSON.stringify({
-        mcpServers: {
-          "existing-server": existingConfig.mcpServers["existing-server"],
-          "cursor-new-server": cursorConfig.mcpServers["new-server"]
-        }
-      }, null, 2)
+      JSON.stringify(
+        {
+          mcpServers: {
+            "existing-server": existingConfig.mcpServers["existing-server"],
+            "cursor-new-server": cursorConfig.mcpServers["new-server"],
+          },
+        },
+        null,
+        2
+      )
     );
   });
 
@@ -131,9 +139,9 @@ describe("importCommand", () => {
           args: ["/path/to/server.py"],
           env: { API_KEY: "cline_key" },
           alwaysAllow: ["tool1", "tool2"],
-          disabled: false
-        }
-      }
+          disabled: false,
+        },
+      },
     };
 
     mockExistsSync.mockImplementation((path) => {
@@ -148,11 +156,15 @@ describe("importCommand", () => {
 
     expect(mockWriteFileSync).toHaveBeenCalledWith(
       "./mcp.json",
-      JSON.stringify({
-        mcpServers: {
-          "cline-cline-server": clineConfig.mcpServers["cline-server"]
-        }
-      }, null, 2)
+      JSON.stringify(
+        {
+          mcpServers: {
+            "cline-cline-server": clineConfig.mcpServers["cline-server"],
+          },
+        },
+        null,
+        2
+      )
     );
   });
 
@@ -173,14 +185,14 @@ describe("importCommand", () => {
 
   it("should show verbose output when requested", async () => {
     mockExistsSync.mockReturnValue(false);
-    
+
     await importCommand({ cursor: true, verbose: true });
-    
+
     expect(console.log).toHaveBeenCalledWith(
       "Searched paths:",
       expect.objectContaining({
         global: expect.stringContaining(".cursor/mcp.json"),
-        local: ".cursor/mcp.json"
+        local: ".cursor/mcp.json",
       })
     );
   });
