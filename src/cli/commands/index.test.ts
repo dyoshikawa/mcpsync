@@ -26,8 +26,8 @@ describe("CLI Commands", () => {
       expect(() => gitignoreCommand()).toThrow("Not implemented");
     });
 
-    it("should throw 'Not implemented' error for importCommand", () => {
-      expect(() => importCommand()).toThrow("Not implemented");
+    it("should be exported as a function for importCommand", () => {
+      expect(typeof importCommand).toBe("function");
     });
 
     it("should throw 'Not implemented' error for initCommand", () => {

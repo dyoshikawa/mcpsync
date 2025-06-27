@@ -7,9 +7,7 @@ export const addCommand = () => {
 export const gitignoreCommand = () => {
   throw new Error("Not implemented");
 };
-export const importCommand = () => {
-  throw new Error("Not implemented");
-};
+export { importCommand } from "./import.js";
 export const initCommand = () => {
   throw new Error("Not implemented");
 };
