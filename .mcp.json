@@ -1,10 +1,12 @@
 {
   "mcpServers": {
-    "shared-server": {
-      "type": "stdio",
-      "command": "/path/to/server",
-      "args": [],
-      "env": {}
+    "o3-search": {
+      "command": "npx",
+      "args": ["o3-search-mcp"],
+      "env": {
+        "SEARCH_CONTEXT_SIZE": "medium",
+        "REASONING_EFFORT": "medium"
+      }
     }
   }
 }
